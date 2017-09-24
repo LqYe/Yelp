@@ -14,8 +14,14 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     var businesses: [Business]!
     
     @IBOutlet weak var resultsTableView: UITableView!
-    var searchBar: UISearchBar!
     var filterSearchSettings = FilterSettings()
+
+    //views
+    var searchBar: UISearchBar!
+    var spinner: UIActivityIndicatorView!
+
+    //infinite scrolling
+    var isMoreDataLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +36,13 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         searchBar.delegate = self
         navigationItem.titleView = searchBar
         
+        //add inifite scroll indicator
+        spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        spinner.frame = CGRect(x:0, y: 0, width: self.resultsTableView.frame.width, height: 40)
+        self.resultsTableView.tableFooterView = spinner
+        
         //perform search at first loaded
+        businesses = [Business]()
         doSearch()
         
         /* Example of Yelp search with more search options specified
@@ -67,6 +79,17 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        //when it reaches bottom of tableview
+        if(indexPath.section == self.businesses.count - 1 && resultsTableView.isDragging) {
+            isMoreDataLoading = true
+            spinner.startAnimating()
+            doSearch()
+        }
+        
+    }
+    
     // MARK: - Perform Search
     fileprivate func doSearch() {
         
@@ -78,16 +101,31 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let selectedCategories = filterSearchSettings.selectedCategories
         if selectedCategories.count > 0 {
             categories = [String] ()
-            for (key, value) in selectedCategories {
+            for (_, value) in selectedCategories {
                     categories?.append(value)
             }
         }
         let deals = filterSearchSettings.isOfferingDeal
         let distance = filterSearchSettings.radius[filterSearchSettings.distanceSelectedIndex]
+        let offset = isMoreDataLoading ? businesses.count : nil
         
-        Business.searchWithTerm(term: term, sort: sortby, categories: categories, deals: deals, distance: distance, completion: { (businesses: [Business]?, error: Error?) -> Void in
-
-            self.businesses = businesses
+        Business.searchWithTerm(term: term, sort: sortby, categories: categories, deals: deals, distance: distance, offset: offset, completion: { (businesses: [Business]?, error: Error?) -> Void in
+            
+            
+            //update load more data flag
+            if self.isMoreDataLoading {
+                if let businesses = businesses {
+                    self.businesses.append(contentsOf: businesses)
+                }
+                self.spinner.stopAnimating()
+            } else {
+                self.businesses = businesses
+                self.resultsTableView.setContentOffset(.zero, animated: false)
+            }
+            
+            self.isMoreDataLoading = false
+            
+         
             self.resultsTableView.reloadData()
             //MBProgressHUD.hide(for: self.view, animated: true)
         }
