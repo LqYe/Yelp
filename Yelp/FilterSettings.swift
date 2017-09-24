@@ -14,10 +14,11 @@ class FilterSettings {
     var searchString: String?
     var isOfferingDeal = false
     var showDistance = false
+    let radius = [0, 483.803, 1609.34, 8046.72, 32186.9]
     let distances = ["Best Match", "0.3 miles", "1 mile", "5 miles", "20 miles"]
     var distanceSelectedIndex = 0;
     var showSortBy = false
-    var sortBys = ["Best Match", "Distance", "Rating", "Most Reviewed"]
+    var sortBys = ["Best Match", "Distance", "Highest Rated"]
     var sortbySelectedIndex = 0;
     var showAllCategories = false
     var categoryFilters: [Bool]!
@@ -26,6 +27,7 @@ class FilterSettings {
     init() {
             categoryFilters = [Bool](repeating: false, count: categories.count)
     }
+    
     
     let categories = [["name" : "Afghan", "code": "afghani"],
                       ["name" : "African", "code": "african"],

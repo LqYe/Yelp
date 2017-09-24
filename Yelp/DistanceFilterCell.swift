@@ -11,6 +11,7 @@ import UIKit
 class DistanceFilterCell: UITableViewCell {
 
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var distanceDropDownLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

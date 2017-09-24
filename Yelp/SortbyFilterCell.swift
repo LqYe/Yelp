@@ -11,6 +11,7 @@ import UIKit
 class SortbyFilterCell: UITableViewCell {
 
     @IBOutlet weak var sortbyLabel: UILabel!
+    @IBOutlet weak var sortbyDropDownLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

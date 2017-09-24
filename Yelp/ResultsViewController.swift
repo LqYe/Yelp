@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var businesses: [Business]!
     
     @IBOutlet weak var resultsTableView: UITableView!
+    var searchBar: UISearchBar!
+    var filterSearchSettings = FilterSettings()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,24 +25,13 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         resultsTableView.rowHeight = UITableViewAutomaticDimension
                 
         //add a search bar
-        let searchBar = UISearchBar()
+        searchBar = UISearchBar()
         searchBar.sizeToFit()
+        searchBar.delegate = self
         navigationItem.titleView = searchBar
         
-        Business.searchWithTerm(term: "Chinese", completion: { (businesses: [Business]?, error: Error?) -> Void in
-            
-            self.businesses = businesses
-            self.resultsTableView.reloadData()
-            
-            if let businesses = businesses {
-                for business in businesses {
-                    print(business.name!)
-                    print(business.address!)
-                }
-            }
-            
-            }
-        )
+        //perform search at first loaded
+        doSearch()
         
         /* Example of Yelp search with more search options specified
          Business.searchWithTerm("Restaurants", sort: .distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: Error!) -> Void in
@@ -75,6 +67,35 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
+    // MARK: - Perform Search
+    fileprivate func doSearch() {
+        
+        //MBProgressHUD.showAdded(to: self.view, animated: true)
+
+        let term = filterSearchSettings.searchString ?? "Everything"
+        let sortby = YelpSortMode(rawValue: filterSearchSettings.sortbySelectedIndex)
+        var categories: [String]?
+        let selectedCategories = filterSearchSettings.selectedCategories
+        if selectedCategories.count > 0 {
+            categories = [String] ()
+            for (key, value) in selectedCategories {
+                    categories?.append(value)
+            }
+        }
+        let deals = filterSearchSettings.isOfferingDeal
+        let distance = filterSearchSettings.radius[filterSearchSettings.distanceSelectedIndex]
+        
+        Business.searchWithTerm(term: term, sort: sortby, categories: categories, deals: deals, distance: distance, completion: { (businesses: [Business]?, error: Error?) -> Void in
+
+            self.businesses = businesses
+            self.resultsTableView.reloadData()
+            //MBProgressHUD.hide(for: self.view, animated: true)
+        }
+        )
+        
+        
+    }
+    
     /*
      // MARK: - Navigation
      
@@ -84,5 +105,63 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
      // Pass the selected object to the new view controller.
      }
      */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "ShowFilterSettings" {
+            
+            guard let filterNav = segue.destination as? UINavigationController,
+                let filterVC = filterNav.viewControllers.first as? FiltersViewController else {
+                    return
+            }
+        
+            filterVC.prepare(filterSetting: filterSearchSettings, filterSettingsHandler: { (filters) in
+                self.filterSearchSettings = filters
+                self.doSearch()
+            })
+        
+        }
+        
+    }
+    
+    
+    
+}
+
+//search bar extension
+extension ResultsViewController: UISearchBarDelegate {
+    
+    //on search button clicked
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        filterSearchSettings.searchString = searchBar.text
+        doSearch()
+    }
+    
+     //on search bar text changed
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterSearchSettings.searchString = searchText
+        doSearch()
+    }
+    
+    //show cancel button
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        return true
+    }
+    
+    //dismiss cancel button
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(false, animated: true)
+        return true
+    }
+    
+    //dismiss input keyboard
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        self.searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        
+    }
+    
     
 }

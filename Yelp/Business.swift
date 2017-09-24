@@ -24,7 +24,7 @@ class Business: NSObject {
         if imageURLString != nil {
             imageURL = URL(string: imageURLString!)!
         } else {
-            imageURL = nil
+            imageURL = URL(string: "https://s3-media3.fl.yelpcdn.com/assets/srv0/yelp_styleguide/fe8c0c8725d3/assets/img/default_avatars/business_90_square.png")!
         }
         
         let location = dictionary["location"] as? NSDictionary
@@ -88,7 +88,7 @@ class Business: NSObject {
         _ = YelpClient.sharedInstance.searchWithTerm(term, completion: completion)
     }
     
-    class func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> Void {
-        _ = YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: categories, deals: deals, completion: completion)
+    class func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, distance: Double?, completion: @escaping ([Business]?, Error?) -> Void) -> Void {
+        _ = YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: categories, deals: deals, distance: distance, completion: completion)
     }
 }

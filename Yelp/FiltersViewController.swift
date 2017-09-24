@@ -13,6 +13,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var filtersTableView: UITableView!
 
     fileprivate var filterSettings: FilterSettings = FilterSettings.init()
+    fileprivate var filterSettingsHandler: (FilterSettings) -> Void = { (filters) in }
     fileprivate var filterCellIdentifiers = ["OfferFilterCell", "DistanceHeaderCell", "DistanceFilterCell", "SortbyHeaderCell", "SortbyFilterCell", "CategoryHeaderCell", "CategoryFilterCell", "SeeAllCategoriesCell"]
     
     var categories: [[String: String]]!
@@ -28,6 +29,15 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Do any additional setup after loading the view.
     }
 
+    func prepare(filterSetting: FilterSettings?, filterSettingsHandler: @escaping (FilterSettings) -> Void) {
+        
+        if let filterSetting = filterSetting {
+            self.filterSettings = filterSetting
+        }
+        
+        self.filterSettingsHandler = filterSettingsHandler
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,6 +50,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     @IBAction func onSearchNavButtonClicked(_ sender: Any) {
+        filterSettingsHandler(filterSettings)
         dismiss(animated: true, completion: nil)
     }
     
@@ -65,6 +76,16 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+        switch section {
+        case 0, 1, 3, 5:
+            return 30
+
+        default:
+            return 0
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -116,11 +137,13 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             guard let distanceFilterCell = filtersTableView.dequeueReusableCell(withIdentifier: filterCellIdentifiers[2]) as? DistanceFilterCell else { return defaultTableViewCell }
             
             if filterSettings.showDistance {
+                distanceFilterCell.distanceDropDownLabel.isHidden = true
                 distanceFilterCell.distanceLabel.text = filterSettings.distances[indexPath.row]
                 distanceFilterCell.accessoryType = indexPath.row == filterSettings.distanceSelectedIndex ? .checkmark : .none
             } else {
+                distanceFilterCell.distanceDropDownLabel.isHidden = false
                 distanceFilterCell.distanceLabel.text = filterSettings.distances[filterSettings.distanceSelectedIndex]
-                distanceFilterCell.accessoryType = .checkmark
+                distanceFilterCell.accessoryType = .none
             }
             
             return distanceFilterCell
@@ -134,11 +157,13 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             guard let sortbyFilterCell = filtersTableView.dequeueReusableCell(withIdentifier: filterCellIdentifiers[4]) as? SortbyFilterCell else { return defaultTableViewCell }
             
             if filterSettings.showSortBy {
+                sortbyFilterCell.sortbyDropDownLabel.isHidden = true
                 sortbyFilterCell.sortbyLabel.text = filterSettings.sortBys[indexPath.row]
                 sortbyFilterCell.accessoryType = indexPath.row == filterSettings.sortbySelectedIndex ? .checkmark : .none
             } else {
+                sortbyFilterCell.sortbyDropDownLabel.isHidden = false
                 sortbyFilterCell.sortbyLabel.text = filterSettings.sortBys[filterSettings.sortbySelectedIndex]
-                sortbyFilterCell.accessoryType = .checkmark
+                sortbyFilterCell.accessoryType = .none
             }
             
             return sortbyFilterCell
