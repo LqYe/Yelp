@@ -36,7 +36,8 @@ The following **additional** features are implemented:
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
 1. How to better use closure pattern to communicate between views and view controllers
-2. Better ways to store and retrieve user settings/filterrs 
+2. Better ways to store and retrieve user settings/filterrs
+3. How to add views programatically with auto layout constraints.
 
 ## Video Walkthrough
 
