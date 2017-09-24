@@ -28,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ChT-mT-QJr" id="7Vf-dl-f9X">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="149.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LSV-4K-TqG">
@@ -160,22 +160,21 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OfferFilterCell" rowHeight="100" id="j0I-Mj-F49" customClass="OfferFilterCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OfferFilterCell" rowHeight="50" id="j0I-Mj-F49" customClass="OfferFilterCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j0I-Mj-F49" id="uUW-Ab-vyC">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jhV-R6-0ud">
-                                                    <rect key="frame" x="357" y="34.333333333333329" width="51" height="30.999999999999986"/>
+                                                    <rect key="frame" x="357" y="9.3333333333333357" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="onOfferSwitchChanged:" destination="j0I-Mj-F49" eventType="valueChanged" id="q8K-ll-ICA"/>
-                                                        <action selector="onOfferingFilterSwitchChanged:" destination="j0I-Mj-F49" eventType="valueChanged" id="LUm-oR-iiS"/>
+                                                        <action selector="onOfferSwitchChanged:" destination="j0I-Mj-F49" eventType="valueChanged" id="r3x-Qy-hgb"/>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Offering a Deal" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xV-dS-gil">
-                                                    <rect key="frame" x="8" y="8" width="122.33333333333334" height="83.666666666666671"/>
+                                                    <rect key="frame" x="8" y="8" width="122.33333333333334" height="33.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -196,10 +195,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DistanceHeaderCell" rowHeight="50" id="QVy-Fr-5gw" customClass="DistanceHeaderCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="128" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="78" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QVy-Fr-5gw" id="VG0-Rl-VnG">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySa-aD-K8H">
@@ -218,10 +217,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DistanceFilterCell" rowHeight="50" id="ucA-Ld-Ior" customClass="DistanceFilterCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="178" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="128" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ucA-Ld-Ior" id="Lb7-Du-7UO">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Match" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ser-3X-348">
@@ -244,10 +243,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SortbyHeaderCell" rowHeight="50" id="MCh-OB-PdF" customClass="SortbyHeaderCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="228" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="178" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MCh-OB-PdF" id="ILw-ag-sGd">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKf-8P-9yg">
@@ -266,10 +265,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SortbyFilterCell" id="9E4-a3-sOd" customClass="SortbyFilterCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="278" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="228" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9E4-a3-sOd" id="tQd-Wu-4vf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Match" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1SB-my-weq">
@@ -291,10 +290,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryHeaderCell" rowHeight="50" id="XH8-yo-cWA" customClass="CategoryHeaderCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="322" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="272" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XH8-yo-cWA" id="UmY-Hh-pPX">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMI-Da-P3P">
@@ -313,29 +312,60 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryFilterCell" id="Rfa-uS-YNB" customClass="CategoryFilterCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="372" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="322" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rfa-uS-YNB" id="eL2-Tr-iwj">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Afghan" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE4-Lp-FdS">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Afghan" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE4-Lp-FdS">
                                                     <rect key="frame" x="8" y="8" width="59" height="27.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mvV-4d-aXz">
+                                                    <rect key="frame" x="357" y="8" width="51" height="27.666666666666664"/>
+                                                </switch>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="mvV-4d-aXz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yE4-Lp-FdS" secondAttribute="trailing" constant="8" id="KSA-0z-Jc1"/>
+                                                <constraint firstAttribute="trailing" secondItem="mvV-4d-aXz" secondAttribute="trailing" constant="8" id="M0C-FU-DEA"/>
+                                                <constraint firstItem="mvV-4d-aXz" firstAttribute="centerY" secondItem="yE4-Lp-FdS" secondAttribute="centerY" id="Rf4-Cs-VLl"/>
                                                 <constraint firstItem="yE4-Lp-FdS" firstAttribute="leading" secondItem="eL2-Tr-iwj" secondAttribute="leading" constant="8" id="VZL-Xv-bDz"/>
                                                 <constraint firstAttribute="bottom" secondItem="yE4-Lp-FdS" secondAttribute="bottom" constant="8" id="bij-VM-DCA"/>
                                                 <constraint firstItem="yE4-Lp-FdS" firstAttribute="top" secondItem="eL2-Tr-iwj" secondAttribute="top" constant="8" id="nBB-ZZ-wkB"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yE4-Lp-FdS" secondAttribute="trailing" constant="8" id="pIa-KA-ErY"/>
+                                                <constraint firstAttribute="bottom" secondItem="mvV-4d-aXz" secondAttribute="bottom" constant="8" id="ze4-qU-rSA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="categoryLabel" destination="yE4-Lp-FdS" id="CQ4-ZK-Hzt"/>
+                                            <outlet property="categorySwitch" destination="mvV-4d-aXz" id="IT5-Uh-3PD"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SeeAllCategoriesCell" id="TWn-ru-Lcx" customClass="SeeAllCategoriesCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="366" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TWn-ru-Lcx" id="nQy-Ak-rrB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="see All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTr-vc-paY">
+                                                    <rect key="frame" x="0.0" y="12" width="414" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="g4f-Sc-0UP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FTr-vc-paY" firstAttribute="leading" secondItem="nQy-Ak-rrB" secondAttribute="leading" id="ADQ-bg-k42"/>
+                                                <constraint firstAttribute="trailing" secondItem="FTr-vc-paY" secondAttribute="trailing" id="eV7-DG-AnC"/>
+                                                <constraint firstItem="FTr-vc-paY" firstAttribute="centerY" secondItem="nQy-Ak-rrB" secondAttribute="centerY" id="trf-1d-70I"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

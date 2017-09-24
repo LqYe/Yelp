@@ -19,10 +19,12 @@ class FilterSettings {
     var showSortBy = false
     var sortBys = ["Best Match", "Distance", "Rating", "Most Reviewed"]
     var sortbySelectedIndex = 0;
-    var showCategories = false
+    var showAllCategories = false
+    var categoryFilters: [Bool]!
+    var selectedCategories = [String: String]()
     
     init() {
-        
+            categoryFilters = [Bool](repeating: false, count: categories.count)
     }
     
     let categories = [["name" : "Afghan", "code": "afghani"],

@@ -1,5 +1,5 @@
 //
-//  OfferFilterCell.swift
+//  SeeAllCategoriesCell.swift
 //  Yelp
 //
 //  Created by Liqiang Ye on 9/23/17.
@@ -8,12 +8,8 @@
 
 import UIKit
 
-class OfferFilterCell: UITableViewCell {
+class SeeAllCategoriesCell: UITableViewCell {
 
-    var offerFilterSwitch: (Bool) -> Void = { (isOn: Bool) -> Void in }
-    
-    @IBOutlet weak var offerSwitch: UISwitch!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,10 +20,5 @@ class OfferFilterCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    
-    @IBAction func onOfferSwitchChanged(_ sender: UISwitch) {
-        offerFilterSwitch(sender.isOn)
-    }
-    
+
 }

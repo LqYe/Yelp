@@ -8,13 +8,12 @@
 
 import UIKit
 
-class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CategoryCellDelegate {
 
     @IBOutlet weak var filtersTableView: UITableView!
 
     fileprivate var filterSettings: FilterSettings = FilterSettings.init()
-//    fileprivate var filterSettingHandler: (FilterSettings) -> Void = { (filters) in }
-    fileprivate var filterCellIdentifiers = ["OfferFilterCell", "DistanceHeaderCell", "DistanceFilterCell", "SortbyHeaderCell", "SortbyFilterCell", "CategoryHeaderCell", "CategoryFilterCell"]
+    fileprivate var filterCellIdentifiers = ["OfferFilterCell", "DistanceHeaderCell", "DistanceFilterCell", "SortbyHeaderCell", "SortbyFilterCell", "CategoryHeaderCell", "CategoryFilterCell", "SeeAllCategoriesCell"]
     
     var categories: [[String: String]]!
     
@@ -58,7 +57,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 4:
             return filterSettings.showSortBy ? filterSettings.sortBys.count : 1
         case 6:
-            return filterSettings.showCategories ? filterSettings.categories.count : 3
+            return filterSettings.showAllCategories ? filterSettings.categories.count : 3
+        case 7:
+            return filterSettings.showAllCategories ? 0 : 1
         default:
             return 0
         }
@@ -74,15 +75,17 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                     filterSettings.distanceSelectedIndex = indexPath.row
                 }
                 filterSettings.showDistance = !filterSettings.showDistance
-                filtersTableView.reloadSections(IndexSet (integer: 2), with: .automatic)
+                filtersTableView.reloadSections([2], with: .automatic)
                 //filtersTableView.reloadData()
             case 4:
                 if filterSettings.showSortBy {
                     filterSettings.sortbySelectedIndex = indexPath.row
                 }
                 filterSettings.showSortBy = !filterSettings.showSortBy
-                filtersTableView.reloadSections(IndexSet (integer: 4), with: .automatic)
-
+                filtersTableView.reloadSections([4], with: .automatic)
+            case 7:
+                filterSettings.showAllCategories = !filterSettings.showAllCategories
+                filtersTableView.reloadSections([6, 7], with: .automatic)
             default:
                 ()
         }
@@ -97,7 +100,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 0:
             guard let offerFilterCell = filtersTableView.dequeueReusableCell(withIdentifier: filterCellIdentifiers[0]) as? OfferFilterCell else { return defaultTableViewCell }
             
-            offerFilterCell.offerFilterSwitch = {(isOn) in
+            
+            offerFilterCell.offerFilterSwitch = {(isOn: Bool) in
                 self.filterSettings.isOfferingDeal = isOn
             }
             
@@ -145,15 +149,38 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         case 6:
             guard let categoryFilterCell = filtersTableView.dequeueReusableCell(withIdentifier: filterCellIdentifiers[6]) as? CategoryFilterCell else { return defaultTableViewCell }
+            
+            //#4. make category filter cell delegate to self
+            categoryFilterCell.delegate = self
 
+            let category_name: String = filterSettings.categories[indexPath.row]["name"]!
+            categoryFilterCell.categoryLabel.text = category_name
+            categoryFilterCell.categorySwitch.isOn = filterSettings.categoryFilters[indexPath.row]
+            
             return categoryFilterCell
+        case 7:
+            guard let seeAllCategoriesCell = filtersTableView.dequeueReusableCell(withIdentifier: filterCellIdentifiers[7]) as? SeeAllCategoriesCell else { return defaultTableViewCell }
+            return seeAllCategoriesCell
         default:
             return defaultTableViewCell
         }
         
     }
     
-    
+    //#5: delegate function
+    func categorySwitchChanged(categoryCell: CategoryFilterCell, switchIsOn: Bool) {
+        let indexPath = filtersTableView.indexPath(for: categoryCell)!
+        filterSettings.categoryFilters[indexPath.row] = switchIsOn
+        
+        let category_name: String = filterSettings.categories[indexPath.row]["name"]!
+        let category_code: String = filterSettings.categories[indexPath.row]["code"]!
+        
+        if switchIsOn {
+            filterSettings.selectedCategories[category_name] = category_code
+        } else {
+            filterSettings.selectedCategories.removeValue(forKey: category_name)
+        }
+    }
     
    /*
     // MARK: - Navigation
