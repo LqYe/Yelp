@@ -76,6 +76,9 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.business = businesses[indexPath.section]
         
+        cell.resultNameLabelView.text = "\(indexPath.section + 1). " + cell.business.name!
+
+        
         return cell
     }
     
@@ -159,6 +162,12 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.doSearch()
             })
         
+        } else if segue.identifier == "ShowMapView" {
+            guard let mapViewVC = segue.destination as? ResultsMapViewController else {
+                    return
+            }
+            
+            mapViewVC.businesses = businesses
         }
         
     }

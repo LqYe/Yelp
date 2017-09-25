@@ -136,6 +136,11 @@
                                 <segue destination="faw-lC-e1o" kind="presentation" identifier="ShowFilterSettings" id="Lb1-TY-ZJD"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="DjU-K0-1xR">
+                            <connections>
+                                <segue destination="GTl-rR-xiT" kind="show" identifier="ShowMapView" id="kIq-kk-p9s"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="resultsTableView" destination="qOp-fb-xJa" id="ujF-RD-ls1"/>
@@ -144,6 +149,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2611.594202898551" y="357.88043478260875"/>
+        </scene>
+        <!--Results Map View Controller-->
+        <scene sceneID="KRv-5N-zpd">
+            <objects>
+                <viewController id="GTl-rR-xiT" customClass="ResultsMapViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="v8P-KA-H8h"/>
+                        <viewControllerLayoutGuide type="bottom" id="gp7-Zr-kM6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lAi-ew-OWi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tad-If-nM7">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Tad-If-nM7" firstAttribute="leading" secondItem="lAi-ew-OWi" secondAttribute="leading" id="DVi-l1-5O3"/>
+                            <constraint firstAttribute="trailing" secondItem="Tad-If-nM7" secondAttribute="trailing" id="HdL-Eu-6lY"/>
+                            <constraint firstItem="Tad-If-nM7" firstAttribute="top" secondItem="v8P-KA-H8h" secondAttribute="bottom" id="Ier-no-QQC"/>
+                            <constraint firstItem="gp7-Zr-kM6" firstAttribute="top" secondItem="Tad-If-nM7" secondAttribute="bottom" id="T57-mp-rau"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="resultsMapView" destination="Tad-If-nM7" id="Fcg-QE-XUQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2DB-CR-KRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2611.594202898551" y="1177.9891304347827"/>
         </scene>
         <!--Filters-->
         <scene sceneID="VJv-Jr-OYv">
