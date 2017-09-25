@@ -182,6 +182,8 @@ extension ResultsViewController: UISearchBarDelegate {
     //on search button clicked
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         filterSearchSettings.searchString = searchBar.text
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
         doSearch()
     }
     
