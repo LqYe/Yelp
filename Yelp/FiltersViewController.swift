@@ -45,13 +45,22 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 
     @IBAction func onCancelNavButtonClicked(_ sender: Any) {
+        resetFilterDropdowns()
         dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func onSearchNavButtonClicked(_ sender: Any) {
         filterSettingsHandler(filterSettings)
+        resetFilterDropdowns()
         dismiss(animated: true, completion: nil)
+    }
+    
+    //reset filter view dropdowns so that expanded filters are collapsed
+    fileprivate func resetFilterDropdowns() {
+        filterSettings.showDistance = false
+        filterSettings.showSortBy = false
+        filterSettings.showAllCategories = false
     }
     
     // MARK: - Tableview Setup

@@ -93,7 +93,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - Perform Search
     fileprivate func doSearch() {
         
-        //MBProgressHUD.showAdded(to: self.view, animated: true)
+        if !isMoreDataLoading {MBProgressHUD.showAdded(to: self.view, animated: true)}
 
         let term = filterSearchSettings.searchString ?? "Everything"
         let sortby = YelpSortMode(rawValue: filterSearchSettings.sortbySelectedIndex)
@@ -109,8 +109,8 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let distance = filterSearchSettings.radius[filterSearchSettings.distanceSelectedIndex]
         let offset = isMoreDataLoading ? businesses.count : nil
         
+        //number of results business returned per API call is default to be 20. It can be changed by passing the limit parameter
         Business.searchWithTerm(term: term, sort: sortby, categories: categories, deals: deals, distance: distance, offset: offset, completion: { (businesses: [Business]?, error: Error?) -> Void in
-            
             
             //update load more data flag
             if self.isMoreDataLoading {
@@ -118,16 +118,18 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.businesses.append(contentsOf: businesses)
                 }
                 self.spinner.stopAnimating()
+                self.resultsTableView.reloadData()
             } else {
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.businesses = businesses
-                self.resultsTableView.setContentOffset(.zero, animated: false)
+                //self.resultsTableView.setContentOffset(.zero, animated: false)
+                let indexPath = IndexPath(row: 0, section: 0)
+                self.resultsTableView.reloadData()
+                self.resultsTableView.scrollToRow(at: indexPath, at: .top, animated: false)
             }
             
             self.isMoreDataLoading = false
             
-         
-            self.resultsTableView.reloadData()
-            //MBProgressHUD.hide(for: self.view, animated: true)
         }
         )
         
@@ -175,10 +177,10 @@ extension ResultsViewController: UISearchBarDelegate {
     }
     
      //on search bar text changed
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterSearchSettings.searchString = searchText
-        doSearch()
-    }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        filterSearchSettings.searchString = searchText
+//        doSearch()
+//    }
     
     //show cancel button
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
